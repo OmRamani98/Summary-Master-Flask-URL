@@ -4,3 +4,4 @@ Gunicorn
 Flask-Cors
 youtube_transcript_api
 spacy
+en_core_web_sm
