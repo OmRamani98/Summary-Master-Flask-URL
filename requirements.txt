@@ -1,0 +1,6 @@
+flask
+nltk
+Gunicorn
+Flask-Cors
+youtube_transcript_api
+spacy
