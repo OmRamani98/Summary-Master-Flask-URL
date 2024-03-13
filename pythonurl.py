@@ -1,9 +1,8 @@
-# app.py
+import os
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from youtube_transcript_api import YouTubeTranscriptApi
 import spacy
-
 
 app = Flask(__name__)
 CORS(app)
@@ -16,11 +15,9 @@ def get_transcript():
         print('Received YouTube URL:', youtube_url)
 
         transcript = YouTubeTranscriptApi.get_transcript(youtube_url)
-        #print(transcript)
         transcript_text = ' '.join(entry['text'] for entry in transcript)
         print(transcript_text)
         
-
         nlp = spacy.load("en_core_web_sm")
         doc = nlp(transcript_text)
 
@@ -36,10 +33,9 @@ def get_transcript():
                 current_sentence += token.text_with_ws
         # add the last sentence
         sentences.append(current_sentence.strip() + ".")
-        final=""
+        final = ""
         for paragraph in sentences:
-            final+=paragraph
-        print(final)
+            final += paragraph
         
         return jsonify({'transcript': final})
 
@@ -48,4 +44,5 @@ def get_transcript():
         return jsonify({'error': 'Failed to get transcript'}), 500
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5001)
+    port = int(os.environ.get('PORT', 5001))
+    app.run(debug=False, host='0.0.0.0', port=port)
