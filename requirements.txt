@@ -3,5 +3,5 @@ nltk
 Gunicorn
 Flask-Cors
 youtube_transcript_api
-spacy
+spacy~=3.4
 
