@@ -5,7 +5,7 @@ from youtube_transcript_api import YouTubeTranscriptApi
 import spacy
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/api/*": {"origins": "http://localhost:3000"}})
 
 @app.route('/api/getTranscript', methods=['POST'])
 def get_transcript():
