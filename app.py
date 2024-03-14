@@ -6,7 +6,7 @@ import spacy
 
 
 app = Flask(__name__)
-CORS(app, resources={r"/getTranscript": {"origins": "http://localhost:3000"}})    
+CORS(app)    
 
 @app.route('/getTranscript', methods=['POST'])
 def get_transcript():
